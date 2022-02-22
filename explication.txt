@@ -1,0 +1,25 @@
+Coté jquery pour imposé des contraintes au niveau de votre formulaire vous pouvez proceder comme suit:
+------------------------------------------------------------------------------------------------------
+1- soit vous utiliser les règles jquery(rules) et les messages de jquery(messages).
+
+2- soit vous partez sur le principe d'utilisation d'une variable boolean(par exemple: return (result=false))
+   qui aura comme but de controler le comportement par defaut d'une page html car je rapelle que par defaut un formulaire
+   sera soumis même s'il ne contient aucune information dans les champs de ce formulaire. Puis après vous enchainer avec 
+   les condition de verification des valeur des champs (par exemple if ($("#name").val()=="" {bloqué formulaire})
+ NB: pour bloquer le comportement par defaut il faut obligatoirement utiliser le mot clé <<return>>.
+
+Remarque n°1 :
+------------
+il est possible d'appliquer a ce message($("#"name).text(message d'erreur).css()) d'erreur des propriété CSS
+Par contre ce qu'il faut retenir est que ci vous avez  plusieur propriété CSS à appliquer ouvrez une {} et mettez y 
+les propriétés CSS tout en omettant les "" pour les attribut CSS contrairement a lorsque nous avons une et une seul propriétés CSS
+dont le mode d'emploi est le suivant :
+
+--- $("#"name).text(message d'erreur).css("color", "red") ---
+remarquer bien la difference car avec une seul propriété nous avons la présences des {""} au niveau de l'attribut CSS Color  
+
+
+Remarque n°2 :
+-------------
+l'utilisation/la mis en evidence d'une expression regulières requière l'utilisation obligatoire de la methodes /match(//)/.
+coté jquery la methodes s'appelle match(/c'est deux slash sont obligatoire/) et coté php elle est s'appelle preg_match();

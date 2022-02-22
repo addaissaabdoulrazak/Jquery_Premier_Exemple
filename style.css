@@ -1,0 +1,11 @@
+.form {
+  /* background-color: black;*/
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+label {
+  margin-right: 10px;
+  width: 100px;
+  text-align: right;
+}

@@ -1,0 +1,97 @@
+<!-- Pour pallier au problème de redirection  vers la page php sachant que 405 methode POST not allowed(non autorisé)
+     command utiliser etait  php -S {127.0.0.1:5500(changeable a vous de voir) } -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="./script.js"></script>
+    <title>PHP</title>
+  </head>
+  <body>
+    <form action="/traitement.php" method="post" id="formulaire">
+      <fieldset>
+        <legend>Coordonnées</legend>
+        <p class="form">
+          <label for="prenom">Prénom</label>
+          <input type="text" name="prenom" id="prenom" />
+          <p class="PrenomError"></p>
+        </p>
+        <p class="formulaire">
+          <label for="nom">Nom</label>
+          <input type="text" name="nom" id="nom" />
+          <span class="NomError"></span>
+        </p>
+        <p class="formulaire">
+          <label for="email">Email</label>
+          <input type="text" name="email" id="email" />
+          <span class="EmailError"></span>
+        </p>
+      </fieldset>
+      <p style="text-align: center">
+        <input type="submit" value="valider" />
+      </p>
+    </form>
+    <script src="./jquery.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#formulaire").submit(function () {
+        /********************************************************
+         * Approche d'utilisation d'une variable Boolean        *
+        *********************************************************/
+
+          /*
+                             Bonne Pratique
+                             --------------
+          Test pour verifier la validité de ma function avant de poursuivre
+          alert("bonjour adda");
+           */
+          var result = true;
+          if ($("#prenom").val() == "") {
+            $("#prenom").css("border-color", "red");
+      //il est possible d'appliquer a ce message d'erreur des propriété CSS
+      //Par contre ce qu'il faut retenir est que ci vous avez des plusieur propriété CSS à appliquer ouvrez une {} 
+            $(".PrenomError").html("<i>ce champs est requis</i>").css({
+              color:"red",
+              margin:"auto 0px",
+            });
+            result = false;
+          }else{
+            $("#prenom").css('border-color', "green")
+            $(".PrenomError").html('');
+          }
+          if($("#nom").val()=="")
+          {
+            $("#nom").css("border-color","red");
+            $(".NomError").html("<i>le champs Nom est requis</i>").css({
+                color:"red",
+                margin:"auto",
+            });
+            result = false;
+          }else{
+            $("#nom").css("border-color","green")
+            $(".NomError").html("");
+          }
+        /*Partie email est particulière car nous allons devoir imposer a l'utilisateur de respecter le critère des emails
+          et pour cela nous allons devoir utiliser les expression regulières*/
+        if(!$("#email").val().match(/^([a-zA-Z0-9\.]+@+[a-zA-Z]+(\.)+[a-zA-Z]{2,3})$/))
+        {
+          $("#email").css("border-color", "red");
+          $(".EmailError").text("le Email saisi n'est pas valid").css("color","red");
+          result = false;
+        }
+        else{
+          $("#email").css("border-color", "green");
+          $(".EmailError").text("");
+        }
+
+
+          return result;
+        });
+      });
+    </script>
+  </body>
+</html>
